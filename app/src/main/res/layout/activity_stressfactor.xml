@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main"
+        android:background="@color/white"
+        tools:context=".stressfactor">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stress Factor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <!-- Enter weight -->
+        <TextView
+            android:id="@+id/label_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Enter weight (Kg)"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <EditText
+            android:id="@+id/input_weight"
+            android:layout_width="359dp"
+            android:layout_height="50dp"
+            android:hint="Weight in Kg"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_weight" />
+
+        <!-- Enter height -->
+        <TextView
+            android:id="@+id/label_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Enter height (cm)"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_weight" />
+
+        <EditText
+            android:id="@+id/input_height"
+            android:layout_width="339dp"
+            android:layout_height="50dp"
+            android:hint="Height in cm"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_height" />
+
+        <!-- Enter age -->
+        <TextView
+            android:id="@+id/label_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Enter age"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_height" />
+
+        <!-- Today's goal heading -->
+        <EditText
+            android:id="@+id/input_age"
+            android:layout_width="367dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="24dp"
+            android:hint="Age"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_age" />
+
+        <TextView
+            android:id="@+id/todays_goal_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today's Goal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/input_age"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Amount of water to drink -->
+        <TextView
+            android:id="@+id/label_water"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="The amount of water to drink:"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todays_goal_heading" />
+        <TextView
+            android:id="@+id/waterCups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/todays_goal_heading"
+            app:layout_constraintStart_toEndOf="@id/label_water"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Amount of diet calories to eat -->
+        <TextView
+            android:id="@+id/label_diet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="The amount of diet calories to eat:"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_water" />
+        <TextView
+            android:id="@+id/caloriesAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/label_water"
+            app:layout_constraintStart_toEndOf="@id/label_diet"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Daily Log heading -->
+        <TextView
+            android:id="@+id/daily_log_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily Log"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/caloriesAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Cup or glass of water drank today -->
+        <TextView
+            android:id="@+id/label_water_drank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="The cup or glass of water I drank today:"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/daily_log_heading" />
+
+        <Spinner
+            android:id="@+id/spinner_water_drank"
+            android:layout_width="344dp"
+            android:layout_height="54dp"
+            android:entries="@array/water_cups_array"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_water_drank" />
+
+        <!-- Calories had today -->
+        <TextView
+            android:id="@+id/label_calories_had"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="How many calories did I have today?"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_water_drank" />
+
+        <!-- Hours of sleep had today -->
+        <EditText
+            android:id="@+id/input_calories_had"
+            android:layout_width="364dp"
+            android:layout_height="52dp"
+            android:hint="Calories"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_calories_had" />
+
+        <TextView
+            android:id="@+id/label_sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="How many hours of sleep have I had today?"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_calories_had" />
+
+        <!-- Save Log Button -->
+        <Spinner
+            android:id="@+id/spinner_sleep"
+            android:layout_width="362dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/sleep_hours_array"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_sleep" />
+
+        <Button
+            android:id="@+id/saveLog"
+            android:layout_width="364dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="24dp"
+            android:text="Save Log"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/msg3"
+            app:layout_constraintTop_toBottomOf="@+id/msg3" />
+
+        <TextView
+            android:id="@+id/water_dis"
+            android:layout_width="73dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/label_water"
+            app:layout_constraintTop_toTopOf="@+id/label_water" />
+
+        <TextView
+            android:id="@+id/calorie_dis"
+            android:layout_width="69dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/label_diet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/label_diet"
+            app:layout_constraintTop_toTopOf="@+id/label_diet" />
+
+        <TextView
+            android:id="@+id/msg1"
+            android:layout_width="369dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/msg2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_sleep" />
+
+        <TextView
+            android:id="@+id/msg2"
+            android:layout_width="364dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/msg3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/msg1" />
+
+        <TextView
+            android:id="@+id/msg3"
+            android:layout_width="368dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/saveLog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/msg2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
