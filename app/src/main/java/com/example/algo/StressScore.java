@@ -2,6 +2,7 @@ package com.example.algo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import java.util.ArrayList;
 
 import java.util.List;
@@ -38,11 +41,12 @@ public class StressScore extends AppCompatActivity {
         pieChart = findViewById(R.id.pieChart);
         stressScoreBar = findViewById(R.id.stressScoreBar);
 
-        int water = getIntent().getIntExtra("water", 0);
-        int calories = getIntent().getIntExtra("calories", 0);
-        int sleep = getIntent().getIntExtra("sleep", 0);
+        int water = getIntent().getIntExtra("water", 6);
+        int calories = getIntent().getIntExtra("calories", 2500);
+        int sleep = getIntent().getIntExtra("sleep", 8);
 
-        updatepiechart(water, calories, sleep);
+        setupPieChart();
+        updatePieChart(water, calories, sleep);
         stressscoreprogress(water, calories, sleep);
 
         back = findViewById(R.id.back);
@@ -53,45 +57,86 @@ public class StressScore extends AppCompatActivity {
     }
 
 
-    private void updatepiechart(int water, int calories, int sleep){
-       List<PieEntry> entries = new ArrayList<>(); // Create a list to hold pie chart entries
+    private void setupPieChart() {
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
 
-        // Add a pie chart entry for water , calore intake, and sleep hr  with the labels
-       entries.add(new PieEntry(water, "Water Intake"));
-       entries.add(new PieEntry(calories, "Calories Intake"));
-       entries.add(new PieEntry(sleep, "Sleep Hours"));
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
 
-       // Create a PieDataSet object with the entries and a label "Daily log"
-       PieDataSet dataSet= new PieDataSet(entries, "Daily log");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
 
-       // Set the colors for each slice of the pie chart
-       dataSet.setColors(new int[]{Color.parseColor("#1DA8D8"), Color.parseColor("#D39DF7"), Color.parseColor("#990099")});
+        pieChart.setRotationAngle(0);
+        pieChart.setRotationEnabled(true);
+        pieChart.setHighlightPerTapEnabled(true);
+    }
 
-        // Create a PieData object with the data set
-       PieData piedata = new PieData(dataSet);
+    private void updatePieChart(int water, int calories, int sleep) {
 
-        // Set the PieData object to the pie chart
-        pieChart.setData(piedata);
 
-        // Refresh the pie chart with the new data
-       pieChart.invalidate();
+        final int targetWater = 8; // cups
+        final int targetCalories = 2500; // calories
+        final int targetSleep = 8; // hours
+        float normalizedWater = (float) water / targetWater * 100;
+        float normalizedCalories = (float) calories / targetCalories * 100;
+        float normalizedSleep = (float) sleep / targetSleep * 100;
+        float total = water + calories + sleep;
+        float finalwater = (normalizedWater/total)*100;
+        float finalcalories = (normalizedCalories/total)*100;
+        float finalsleep = (normalizedSleep/total)*100;
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(finalwater, "Water Intake"));
+        entries.add(new PieEntry(finalcalories, "Calories Intake"));
+        entries.add(new PieEntry(finalsleep, "Sleep Hours"));
+
+        PieDataSet dataSet = new PieDataSet(entries, "Daily log");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        PieData pieData = new PieData(dataSet);
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.WHITE);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate(); // Refresh the chart
     }
 
     private void stressscoreprogress(int water, int calories, int sleep){
-        int stressScore = 0; // Initialize the stress score to 0
+        int stressScore = 0;
 
-        // Check if the values are within the specified range and adjust the stress score accordingly
-        if (water < 4 || water > 13) {
+        if (water > 4 && water < 13) {
             stressScore += 30;
+        } else {
+            stressScore += 10;
         }
-        if (calories < 1200 || calories > 4000) {
+
+        if (calories > 1200 && calories < 4000) {
             stressScore += 30;
+        } else {
+            stressScore += 10;
         }
-        if (sleep < 6 || sleep > 12) {
+
+
+        if (sleep > 6 && sleep < 10) {
             stressScore += 40;
+        } else {
+            stressScore += 10;
         }
-        // Set the progress bar's progress to the calculated stress score
+
+
+        stressScoreBar.setMax(100); // Ensure the ProgressBar's maximum is set to 100
         stressScoreBar.setProgress(stressScore);
+
+        if (stressScore <= 33) {
+            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        } else if (stressScore <= 66) {
+            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
+        } else {
+            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+        }
     }
 }
 
