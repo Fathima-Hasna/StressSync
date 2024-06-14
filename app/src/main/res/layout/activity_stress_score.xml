@@ -26,13 +26,14 @@ tools:context=".StressScore"
         <ProgressBar
             android:id="@+id/stressScoreBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="396dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="412dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="20dp"
             android:max="100"
+            android:progressDrawable="@android:drawable/progress_horizontal"
             android:progressTint="#E91E63"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pieChart" />
 
