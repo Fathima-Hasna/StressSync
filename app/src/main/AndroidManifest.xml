@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Algo">
         <activity
+            android:name=".StressScore"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
         </activity>
         <activity
             android:name=".stressfactor"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

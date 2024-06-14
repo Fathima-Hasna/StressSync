@@ -1,6 +1,7 @@
 package com.example.algo;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class stressfactor extends AppCompatActivity {
        private EditText weight,height,age,calories;
        private TextView  logmsg1,logmsg2,logmsg3;
-       private Button savelog;
+       private Button savelog, scorepage;
        private Spinner water,sleep;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -35,11 +36,17 @@ public class stressfactor extends AppCompatActivity {
 
         calories=findViewById(R.id.input_calories_had);
         savelog=findViewById(R.id.saveLog);
+        scorepage=findViewById(R.id.scorepage);
         water=findViewById(R.id.spinner_water_drank);
         sleep=findViewById(R.id.spinner_sleep);
         logmsg1=findViewById(R.id.msg1);
         logmsg2=findViewById(R.id.msg2);
         logmsg3=findViewById(R.id.msg3);
+
+        scorepage.setOnClickListener(v -> {
+            Intent intent = new Intent(this, StressScore.class);
+            startActivity(intent);
+        });
 
         savelog.setOnClickListener(v -> {
             calculateWaterIntake();
@@ -68,7 +75,13 @@ public class stressfactor extends AppCompatActivity {
             int water = Integer.parseInt(waterStr);
             int sleep = Integer.parseInt(sleepStr);
             int calories = Integer.parseInt(calorieStr);
+             //to send the date to the stress score
+            Intent intent = new Intent(this, StressScore.class);
+            intent.putExtra("water", water);
+            intent.putExtra("calories", calories);
+            intent.putExtra("sleep", sleep);
 
+            startActivity(intent);
             // Check water intake
             if (water < 4) {
                 logmsg1.setText("Water intake is below average");
