@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class StressScore extends AppCompatActivity {
     private PieChart pieChart;
     private ProgressBar stressScoreBar;
     private Button back;
+    private  TextView score, mesg,mesg2,mesg3;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,7 @@ public class StressScore extends AppCompatActivity {
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextSize(10f);
-        pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextColor(Color.BLACK);
 
         pieChart.setData(pieData);
         pieChart.invalidate(); // Refresh the chart
@@ -106,36 +108,56 @@ public class StressScore extends AppCompatActivity {
 
     private void stressscoreprogress(int water, int calories, int sleep){
         int stressScore = 0;
+        score = findViewById(R.id.displayscore);
+        mesg = findViewById(R.id.mesg);
+        mesg2 = findViewById(R.id.mesg2);
+        mesg3 = findViewById(R.id.mesg3);
 
         if (water > 4 && water < 13) {
             stressScore += 30;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg.setText("Keep up the healthy limit");
         } else {
             stressScore += 10;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg.setText("Water intake is below average");
         }
 
         if (calories > 1200 && calories < 4000) {
             stressScore += 30;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg2.setText("Keep up the healthy diet");
         } else {
             stressScore += 10;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg2.setText("please have proper meals");
         }
 
 
         if (sleep > 6 && sleep < 10) {
             stressScore += 40;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg3.setText("Perfect sleep");
         } else {
             stressScore += 10;
+            score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
+            mesg3.setText("Sleep quality is less, it will affect your health");
         }
 
 
         stressScoreBar.setMax(100); // Ensure the ProgressBar's maximum is set to 100
         stressScoreBar.setProgress(stressScore);
 
+
         if (stressScore <= 33) {
-            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+
         } else if (stressScore <= 66) {
             stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
+
         } else {
-            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+            stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+
         }
     }
 }

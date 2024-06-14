@@ -16,12 +16,12 @@ tools:context=".StressScore"
             android:id="@+id/pieChart"
             android:layout_width="411dp"
             android:layout_height="303dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
 
-       />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/stressScoreBar"
@@ -51,5 +51,51 @@ tools:context=".StressScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stressScoreBar"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/displayscore"
+            android:layout_width="150dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="96dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/back"
+            app:layout_constraintHorizontal_bias="0.84"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stressScoreBar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/mesg"
+            android:layout_width="303dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="127dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/displayscore" />
+
+        <TextView
+            android:id="@+id/mesg2"
+            android:layout_width="304dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.392"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mesg" />
+
+        <TextView
+            android:id="@+id/mesg3"
+            android:layout_width="307dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mesg2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
