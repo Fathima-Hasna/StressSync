@@ -20,17 +20,34 @@ tools:context=".StressScore"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingClass" />
+       />
 
         <ProgressBar
             android:id="@+id/stressScoreBar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="396dp"
-            android:layout_height="282dp"
+            android:layout_height="200dp"
             android:layout_marginTop="16dp"
             android:max="100"
+            android:progressTint="#E91E63"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pieChart" />
 
+        <Button
+
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="296dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="27dp"
+            android:text="back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stressScoreBar"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
