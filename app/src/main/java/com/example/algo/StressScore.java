@@ -77,69 +77,83 @@ public class StressScore extends AppCompatActivity {
 
     private void updatePieChart(int water, int calories, int sleep) {
 
-
+        // Set the target values
         final int targetWater = 8; // cups
         final int targetCalories = 2500; // calories
-        final int targetSleep = 8; // hours
+        final int targetSleep = 8; // hour
+
         float normalizedWater = (float) water / targetWater * 100;
         float normalizedCalories = (float) calories / targetCalories * 100;
         float normalizedSleep = (float) sleep / targetSleep * 100;
+
         float total = water + calories + sleep;
+
+        // Calculate the final values
         float finalwater = (normalizedWater/total)*100;
         float finalcalories = (normalizedCalories/total)*100;
         float finalsleep = (normalizedSleep/total)*100;
+
         ArrayList<PieEntry> entries = new ArrayList<>();
+        // Add the target values to the entries list
         entries.add(new PieEntry(finalwater, "Water Intake"));
         entries.add(new PieEntry(finalcalories, "Calories Intake"));
         entries.add(new PieEntry(finalsleep, "Sleep Hours"));
 
+        // Create the PieDataSet and set the colors
         PieDataSet dataSet = new PieDataSet(entries, "Daily log");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
+        // Create the PieData and set the data
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextSize(10f);
         pieData.setValueTextColor(Color.BLACK);
 
+        // Update the chart with the new data
         pieChart.setData(pieData);
         pieChart.invalidate(); // Refresh the chart
     }
 
     private void stressscoreprogress(int water, int calories, int sleep){
-        int stressScore = 0;
+        // Initialize the ProgressBar and TextView
+        int stressScore = 100;
         score = findViewById(R.id.displayscore);
         mesg = findViewById(R.id.mesg);
         mesg2 = findViewById(R.id.mesg2);
         mesg3 = findViewById(R.id.mesg3);
 
+        // Update the ProgressBar and TextView based on the target values
         if (water > 4 && water < 13) {
-            stressScore += 30;
+            stressScore -= 30; // Adjust the value as needed
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg.setText("Keep up the healthy limit");
         } else {
-            stressScore += 10;
+            // Handle the case when the target value is not reached
+            stressScore -= 10;
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg.setText("Water intake is below average");
         }
 
         if (calories > 1200 && calories < 4000) {
-            stressScore += 30;
+            // Handle the case when the target value is reached
+            stressScore -= 30;
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg2.setText("Keep up the healthy diet");
         } else {
-            stressScore += 10;
+            // Handle the case when the target value is not reached
+            stressScore -= 10;
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg2.setText("please have proper meals");
         }
 
 
         if (sleep > 6 && sleep < 10) {
-            stressScore += 40;
+            stressScore -= 40;
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg3.setText("Perfect sleep");
         } else {
-            stressScore += 10;
+            stressScore -= 10;
             score.setText("Stress Score =" +" "+ String.valueOf(stressScore));
             mesg3.setText("Sleep quality is less, it will affect your health");
         }
@@ -148,7 +162,7 @@ public class StressScore extends AppCompatActivity {
         stressScoreBar.setMax(100); // Ensure the ProgressBar's maximum is set to 100
         stressScoreBar.setProgress(stressScore);
 
-
+        // Set the progress tint based on the stress score
         if (stressScore <= 33) {
             stressScoreBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
 
