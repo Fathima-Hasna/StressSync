@@ -69,7 +69,7 @@ public class StressScore extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(61f);
-
+        pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(true);
         pieChart.setHighlightPerTapEnabled(true);
@@ -103,9 +103,8 @@ public class StressScore extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries, "Daily log");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        //dataSet.setColors(ColorTemplate.MATERIAL_COLORS({Color.#730073, Color.#1DA8D8, Color.#D39DF7}));
 
-        dataSet.setColors(new int[] {Color.parseColor("#730073"), Color.parseColor("#1DA8D8"), Color.parseColor("#D39DF7")});
+        dataSet.setColors(new int[] {Color.parseColor("#990099"), Color.parseColor("#1DA8D8"), Color.parseColor("#D39DF7")});
         // Create the PieData and set the data
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextSize(10f);
