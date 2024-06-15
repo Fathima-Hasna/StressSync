@@ -43,15 +43,16 @@ public class stressfactor extends AppCompatActivity {
         logmsg2=findViewById(R.id.msg2);
         logmsg3=findViewById(R.id.msg3);
 
-        scorepage.setOnClickListener(v -> {
+        /*scorepage.setOnClickListener(v -> {
             Intent intent = new Intent(this, StressScore.class);
             startActivity(intent);
-        });
+
+        });*/
 
         savelog.setOnClickListener(v -> {
             calculateWaterIntake();
             calculateCalories();
-            dailyLog();
+           dailyLog();
         });
 
     }
@@ -75,13 +76,14 @@ public class stressfactor extends AppCompatActivity {
             int water = Integer.parseInt(waterStr);
             int sleep = Integer.parseInt(sleepStr);
             int calories = Integer.parseInt(calorieStr);
-             //to send the date to the stress score
+
+            //to send the date to the stress score
             Intent intent = new Intent(this, StressScore.class);
             intent.putExtra("water", water);
             intent.putExtra("calories", calories);
             intent.putExtra("sleep", sleep);
-
             startActivity(intent);
+
             // Check water intake
             if (water < 4) {
                 logmsg1.setText("Water intake is below average");
