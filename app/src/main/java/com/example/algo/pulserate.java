@@ -50,96 +50,108 @@ public class pulserate extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE);
 
-        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-        filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
-        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
-        registerReceiver(usbReceiver, filter);
 
-        discoverDevice();
 
-    }
+        class MainActivity extends AppCompatActivity {
 
-    private void discoverDevice() {
-        for (UsbDevice device : usbManager.getDeviceList().values()) {
-            // Optionally check for specific device IDs
-            usbDevice = device;
-            usbManager.requestPermission(device, permissionIntent);
-        }
-    }
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
 
-    private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_USB_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        if (device != null) {
-                            // Call method to set up device communication
-                            setupDeviceCommunication(device);
-                        }
-                    } else {
-                        Toast.makeText(context, "Permission denied for device " + device, Toast.LENGTH_LONG).show();
-                    }
-                }
-            } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
-                UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                if (device != null) {
-                    // Request permission again if the device is attached after app start
+
+                usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+                permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE);
+
+                IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+                filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
+                filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+                registerReceiver(usbReceiver, filter);
+
+                discoverDevice();
+            }
+
+            private void discoverDevice() {
+                for (UsbDevice device : usbManager.getDeviceList().values()) {
+                    // Optionally check for specific device IDs
+                    usbDevice = device;
                     usbManager.requestPermission(device, permissionIntent);
                 }
-            } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
-                UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                if (device != null) {
-                    // Handle USB device detach
-                    closeDeviceConnection(device);
+            }
+
+            private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (ACTION_USB_PERMISSION.equals(action)) {
+                        synchronized (this) {
+                            UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                            if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                                if (device != null) {
+                                    // Call method to set up device communication
+                                    setupDeviceCommunication(device);
+                                }
+                            } else {
+                                Toast.makeText(context, "Permission denied for device " + device, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+                        UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                        if (device != null) {
+                            // Request permission again if the device is attached after app start
+                            usbManager.requestPermission(device, permissionIntent);
+                        }
+                    } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+                        UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                        if (device != null) {
+                            // Handle USB device detach
+                            closeDeviceConnection(device);
+                        }
+                    }
+                }
+            };
+
+            private void setupDeviceCommunication(UsbDevice device) {
+                UsbDeviceConnection connection = usbManager.openDevice(device);
+                if (connection != null) {
+                    // Communicate with the device, setup endpoints, etc.
+                    readFromDevice(connection);
                 }
             }
+
+            private void readFromDevice(UsbDeviceConnection connection) {
+                // Assuming a specific endpoint and interface are known
+                // This part is very device-specific and needs to be tailored to your device
+                UsbDevice device = findUsbDevice(usbManager);
+                UsbInterface usbInterface = device.getInterface(0);
+                int inEndpointAddress = 0x81; // Example endpoint address for bulk transfer
+                byte[] newbuffer = new byte[1024];
+                int timeout = 5000;
+                ByteBuffer buffer = ByteBuffer.allocate(64);
+                UsbEndpoint endpoint = usbInterface.getEndpoint(0);
+                int bytesRead = connection.bulkTransfer(endpoint, buffer.array(), buffer.capacity(), timeout);
+
+
+                if (bytesRead > 0) {
+                    String receivedData = new String(buffer.array(), 0, bytesRead);
+                    Log.i("MainActivity", "Data received: " + receivedData);
+                }
+            }
+
+            private UsbDevice findUsbDevice(UsbManager usbManager) {
+            return usbDevice;}
+
+            private void closeDeviceConnection(UsbDevice device) {
+                // Cleanup or notify user about device detachment
+                Toast.makeText(this, "USB device detached: " + device.getDeviceName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onDestroy() {
+                super.onDestroy();
+                unregisterReceiver(usbReceiver);
+            }
         }
-    };
 
-    private void setupDeviceCommunication(UsbDevice device) {
-        UsbDeviceConnection connection = usbManager.openDevice(device);
-        if (connection != null) {
-            // Communicate with the device, setup endpoints, etc.
-            readFromDevice(connection);
-        }
-    }
-
-    private void readFromDevice(UsbDeviceConnection connection) {
-        // Assuming a specific endpoint and interface are known
-        // This part is very device-specific and needs to be tailored to your device
-        UsbDevice device = findUsbDevice(usbManager);
-        UsbInterface usbInterface = device.getInterface(0);
-        int inEndpointAddress = 0x81; // Example endpoint address for bulk transfer
-        byte[] newbuffer = new byte[1024];
-        int timeout = 5000;
-        ByteBuffer buffer = ByteBuffer.allocate(64);
-        UsbEndpoint endpoint = usbInterface.getEndpoint(0);
-        int bytesRead = connection.bulkTransfer(endpoint, buffer.array(), buffer.capacity(), timeout);
-
-
-        if (bytesRead > 0) {
-            String receivedData = new String(buffer.array(), 0, bytesRead);
-            Log.i("MainActivity", "Data received: " + receivedData);
-        }
-    }
-
-    private UsbDevice findUsbDevice(UsbManager usbManager) {
-        return usbDevice;}
-
-    private void closeDeviceConnection(UsbDevice device) {
-        // Cleanup or notify user about device detachment
-        Toast.makeText(this, "USB device detached: " + device.getDeviceName(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(usbReceiver);
     }
 }
