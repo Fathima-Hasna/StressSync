@@ -34,31 +34,34 @@ public class pulserate extends AppCompatActivity {
 
      private TextView pulse_rate;
      private Button show_pulse;
+    private static final String ACTION_USB_PERMISSION = "com.example.USB_PERMISSION";
+    private UsbManager usbManager;
+    private UsbDevice usbDevice;
+    private PendingIntent permissionIntent;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        pulse_rate=findViewById(R.id.pulse_rate_disp);
+        show_pulse=findViewById(R.id.button);
+        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_pulserate);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        pulse_rate=findViewById(R.id.pulse_rate_disp);
-        show_pulse=findViewById(R.id.button);
+
 
         class MainActivity extends AppCompatActivity {
-            private static final String ACTION_USB_PERMISSION = "com.example.USB_PERMISSION";
-            private UsbManager usbManager;
-            private UsbDevice usbDevice;
-            private PendingIntent permissionIntent;
 
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_main);
+
 
                 usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
                 permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
