@@ -11,7 +11,8 @@
     <!-- ConstraintLayout as the main container -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/main">
 
         <!-- Title TextView -->
         <TextView
@@ -52,6 +53,7 @@
 
             <!-- First FrameLayout for Bubble Pop game -->
             <FrameLayout
+                android:id="@+id/bubble_pop_game"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_margin="5dp"
@@ -70,11 +72,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#6D000000"
                     android:padding="5dp"
                     android:text="Bubble Pop"
                     android:textColor="#FFFFFF"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -104,6 +106,7 @@
 
             <!-- FrameLayout for Color Switch game -->
             <FrameLayout
+                android:id="@+id/color_switch_game"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -122,11 +125,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#A6000000"
                     android:padding="5dp"
                     android:text="Color Switch"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -138,8 +141,9 @@
 
             <!-- FrameLayout for Pictionary game -->
             <FrameLayout
+                android:id="@+id/pictionary_game"
                 android:layout_width="0dp"
-                android:layout_height="167dp"
+                android:layout_height="120dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/pictionary_background"
                 app:layout_columnWeight="1"
@@ -156,11 +160,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#B2000000"
                     android:padding="5dp"
                     android:text="Pictionary"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -172,6 +176,7 @@
 
             <!-- FrameLayout for Quick, Draw! game -->
             <FrameLayout
+                android:id="@+id/quick_draw_game"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_margin="5dp"
@@ -190,11 +195,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#70000000"
                     android:padding="5dp"
                     android:text="Quick, Draw!"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -206,6 +211,7 @@
 
             <!-- FrameLayout for Music Tap game -->
             <FrameLayout
+                android:id="@+id/music_tap_game"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_margin="5dp"
@@ -224,11 +230,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#BF000000"
                     android:padding="5dp"
                     android:text="Music Tap"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -258,6 +264,7 @@
 
             <!-- FrameLayout for Tower of Hanoi game -->
             <FrameLayout
+                android:id="@+id/tower_of_hanoi_game"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_margin="5dp"
@@ -276,12 +283,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:background="@android:color/transparent"
+                    android:background="#54000000"
                     android:padding="5dp"
                     android:text="Tower of Hanoi"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
                     tools:ignore="RtlCompat" />
 
                 <ImageView
