@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,7 +22,6 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
-import com.hoho.android.usbserial.driver.UsbSerialPort;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,7 +29,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.nio.ByteBuffer;
-import java.io.IOException;
 
 public class pulserate extends AppCompatActivity {
 
@@ -45,22 +43,8 @@ public class pulserate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
-        // Initialize UI components
         pulse_rate=findViewById(R.id.pulse_rate_disp);
         show_pulse=findViewById(R.id.button);
-
-        View showPulseButton = null;
-        showPulseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readPulseRateFromarduino();
-            }
-
-            private void readPulseRateFromarduino() {
-            }
-        });
-
         setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_pulserate);
 
