@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Algo">
         <activity
             android:name=".pulserate"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".games"
             android:exported="false" />
