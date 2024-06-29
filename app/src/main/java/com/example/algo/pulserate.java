@@ -22,11 +22,8 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.nio.ByteBuffer;
 
@@ -55,9 +52,9 @@ public class pulserate extends AppCompatActivity {
         });
 
 
-
         class MainActivity extends AppCompatActivity {
 
+            @SuppressLint("UnspecifiedImmutableFlag")
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);

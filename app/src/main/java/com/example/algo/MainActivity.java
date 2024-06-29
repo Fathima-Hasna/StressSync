@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
        //setting the text for the rating bar
         float currentRating = rate1.getRating();
-
         rate1.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -104,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 rate2text.setText("Rating: " + rating);
             }
         });
-       // save but that will call the methods to calculate the priority and day left and display the result and add the task to the list view
+       /*save but that will call the methods to calculate the priority and day left and
+         display the result and add the task to the list view*/
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,10 +142,6 @@ public class MainActivity extends AppCompatActivity {
                 // Notify adapter of data change
                 taskItemAdapter.notifyDataSetChanged();
                 taskname.setText("");
-                 /*  TaskItemAdapter taskItemAdapter = new TaskItemAdapter(MainActivity.this, taskItems);
-                listView.setAdapter(taskItemAdapter);
-                TaskItem newItem = new TaskItem(task, priority);*/
-                /*    taskItems.add(newItem);*/
 
             }
         });
@@ -182,8 +178,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 currentdate.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
-                //selectedDate = getDateFromDatePicker(year, month, dayOfMonth);
-
             }
         }, year, month, dayOfMonth);
         cal.show();
@@ -204,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }, year, month, dayOfMonth);
         cal.show();
     }
+    //to calculate the priority
     private void calculate () {
         priority = rate1.getRating() * rate2.getRating() * (givenDays / leftDays);
         if (priority < 5) {
@@ -221,11 +216,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    //to check if the dates are selected
     private boolean areDatesValid() {
         String d1 = currentdate.getText().toString();
         String d2 = duedate.getText().toString();
         return !d1.isEmpty() && !d2.isEmpty();
     }
+    //to calculate the days left
     private void dayleft () {
         String d3 = duedate.getText().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy"); // Adjusted format
@@ -233,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         Period period = Period.between(d4, LocalDate.parse(d3, formatter));
         leftDays = period.getDays();
     }
+    //to calculate the total days
     private void totaldays() {
         String d1 = currentdate.getText().toString();
         String d2 = duedate.getText().toString();
@@ -242,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         givenDays = ChronoUnit.DAYS.between(dueDate,currentDate);
     }
 
+    //to create the list view
    class TaskItem {
         String taskName;
         float priority;
@@ -251,23 +251,25 @@ public class MainActivity extends AppCompatActivity {
             this.priority = priority;
         }
     }
+    //to create the list view
   class TaskItemAdapter extends ArrayAdapter<TaskItem> {
       public TaskItemAdapter(Context context, ArrayList<TaskItem> items) {
           super(context, 0, items);
       }
 
       @Override
+      //to create the list view
       public View getView(int position, View convertView, ViewGroup parent) {
           TaskItem item = getItem(position);
-
+           // Check if the convertView is null (first time through)
           if (convertView == null) {
               // Use a built-in layout for simplicity (you can customize this)
               convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
           }
-
+          // Find the views in the list item layout
           TextView taskNameTextView = convertView.findViewById(android.R.id.text1);
           TextView priorityTextView = convertView.findViewById(android.R.id.text2);
-
+           // Set the text for the views
           taskNameTextView.setText(item.taskName);
           priorityTextView.setText("Priority: " + item.priority);
 

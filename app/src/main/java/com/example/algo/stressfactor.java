@@ -164,8 +164,6 @@ public class stressfactor extends AppCompatActivity {
             // If weight field is empty, show a message or handle it as needed
             Toast.makeText(this, "Please enter your weight", Toast.LENGTH_SHORT).show();
         }
-
-
     }
     // to display the amount of water intake
     @SuppressLint("WrongViewCast")
